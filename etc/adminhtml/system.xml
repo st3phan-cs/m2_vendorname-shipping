@@ -15,6 +15,11 @@
 					<label>Price</label>
 					<validate>validate-number validate-zero-or-greater</validate>
 				</field>
+				<field id="assurance" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="35" translate="label" type="text">
+					<label>Assurance</label>
+					<comment>The value is a percentage</comment>
+					<validate>validate-number validate-zero-or-greater</validate>
+				</field>
 				<field id="sort_order" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="text">
 					<label>Sort Order</label>
 				</field>

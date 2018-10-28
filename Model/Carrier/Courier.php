@@ -73,6 +73,7 @@ class Courier extends AbstractCarrier implements CarrierInterface
         }
 
         $shippingPrice = $this->getConfigData('price');
+        $assurancePercentage = $this->getConfigData('assurance');
 
         $result = $this->_rateResultFactory->create();
 
@@ -82,11 +83,16 @@ class Courier extends AbstractCarrier implements CarrierInterface
             $method->setCarrier($this->_code);
             $method->setCarrierTitle($this->getConfigData('title'));
 
+            $method->setCarrier($this->_code);
+            $method->setCarrierAssurance($this->getConfigData('assurance'));
+
             $method->setMethod($this->_code);
             $method->setMethodTitle($this->getConfigData('name'));
 
             if ($request->getFreeShipping() === true || $request->getPackageQty() == $this->getFreeBoxes()) {
                 $shippingPrice = '0.00';
+            } elseif ($assurancePercentage) {
+                $shippingPrice += $request->getBaseSubtotalInclTax() * ($assurancePercentage / 100);
             }
 
             $method->setPrice($shippingPrice);
